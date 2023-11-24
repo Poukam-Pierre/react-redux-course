@@ -1,4 +1,4 @@
-import { FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS } from "./userType"
+import { FETCH_USERS_FAILURE, FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, API_START } from "./userType"
 
 const initialState = {
     loading: false,
@@ -8,12 +8,16 @@ const initialState = {
 
 
 const reducer = (state = initialState, action) => {
+    console.log("action type => ", action.type);
     switch (action.type) {
-        case FETCH_USERS_REQUEST:
-            return {
-                ...state,
-                loading: true
+        case API_START:
+            if (action.payload === FETCH_USERS_REQUEST) {
+                return {
+                    ...state,
+                    loading: true
+                }
             }
+            break;
         case FETCH_USERS_SUCCESS:
             return {
                 ...state,
